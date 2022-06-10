@@ -10,7 +10,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Objects;
@@ -46,8 +48,6 @@ public class ControllerAdvisor  extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleAllUncaughtException(Exception exception, WebRequest request) {
-        //log.error("Unknown error occurred", exception);
-        exception.printStackTrace();
         return buildErrorResponse(exception, "Unknown error occurred", HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
@@ -91,4 +91,11 @@ public class ControllerAdvisor  extends ResponseEntityExceptionHandler {
             ResourceNotFoundException exception, WebRequest request) {
         return buildErrorResponse(exception, "No se encontraron registros", HttpStatus.NOT_FOUND, request);
     }
+
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity<Object> handleNotFoundExceptionMicroservicioCliente(
+            HttpClientErrorException exception, WebRequest request) {
+        return buildErrorResponse(exception, exception.getResponseBodyAsString(), exception.getStatusCode(), request);
+    }
+
 }

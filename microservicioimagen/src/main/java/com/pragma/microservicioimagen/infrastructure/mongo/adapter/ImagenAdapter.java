@@ -3,6 +3,7 @@ package com.pragma.microservicioimagen.infrastructure.mongo.adapter;
 import com.pragma.microservicioimagen.domain.exception.ResourceNotFoundException;
 import com.pragma.microservicioimagen.domain.model.Imagen;
 import com.pragma.microservicioimagen.domain.port.outbound.PersistImagen;
+import com.pragma.microservicioimagen.infrastructure.exception.ControllerAdvisor;
 import com.pragma.microservicioimagen.infrastructure.exception.NoSuchElementFoundException;
 import com.pragma.microservicioimagen.infrastructure.mongo.entity.ImageEntity;
 import com.pragma.microservicioimagen.infrastructure.mongo.mapper.ImagenMapperMongo;
@@ -39,8 +40,6 @@ public class ImagenAdapter implements PersistImagen {
 
         ResponseEntity<String> responseCliente
                 = template.getForEntity(utl + "/api/clientes/"+idCliente, String.class);
-
-
 
         ImageEntity imageEntity = new ImageEntity();
         imageEntity.setId(nextSequenceAdapter.getNextSequence("imagenes"));
