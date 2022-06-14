@@ -26,14 +26,5 @@ public class BeanConfiguration {
         return new ModelMapper();
     }
 
-    @Bean
-    public ClienteMapper clienteMapper(){
-        return new ClienteMapper();
-    }
-
-    @Bean
-    public ClienteMapperMysql clienteMapperMysql(){
-        return new ClienteMapperMysql();
-    }
 
 }
