@@ -7,7 +7,7 @@ spring:
       server:
         git:
           uri: https://github.com/jerson86/microservicios_pragma.git
-          searchPath: config-data
+          searchPaths: config-data
           userName: ${GIT_USER}
           password: ${GIT_PASSWORD}
   security:
