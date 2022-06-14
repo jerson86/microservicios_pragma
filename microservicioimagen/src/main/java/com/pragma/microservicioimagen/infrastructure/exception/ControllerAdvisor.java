@@ -95,7 +95,7 @@ public class ControllerAdvisor  extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(HttpClientErrorException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Object> handleNotFoundExceptionMicroservicioCliente(
+    public ResponseEntity<Object> handleNotFoundExceptionMicroservicioImagen(
             HttpClientErrorException exception, WebRequest request) {
         return buildErrorResponse(exception, exception.getResponseBodyAsString(), exception.getStatusCode(), request);
     }

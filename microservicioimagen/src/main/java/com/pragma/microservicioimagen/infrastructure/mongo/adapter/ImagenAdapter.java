@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ImagenAdapter implements PersistImagen {
@@ -36,10 +37,13 @@ public class ImagenAdapter implements PersistImagen {
     }
 
     @Override
-    public Imagen save(String foto, long idCliente) {
-
-        ResponseEntity<String> responseCliente
-                = template.getForEntity(utl + "/api/clientes/"+idCliente, String.class);
+    public Imagen save(String foto, String idCliente) {
+        Optional<ImageEntity> imagenDB = imagenRepository.findByFotoAndIdCliente(foto,idCliente);
+        if(imagenDB.isPresent()){
+            return imagenMapperMongo.mapToModel(imagenDB.get());
+        }
+        ResponseEntity<String> responseImagen
+                = template.getForEntity(utl + "/api/clientes/"+Long.parseLong(idCliente), String.class);
 
         ImageEntity imageEntity = new ImageEntity();
         imageEntity.setId(nextSequenceAdapter.getNextSequence("imagenes"));
@@ -53,7 +57,7 @@ public class ImagenAdapter implements PersistImagen {
     }
 
     @Override
-    public Imagen update(String id, String foto, long idCliente) {
+    public Imagen update(String id, String foto, String idCliente) {
         ImageEntity imageEntity = imagenRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("imagen",Long.parseLong(id)));
         imageEntity.setFoto(foto);
         imageEntity.setId(id);

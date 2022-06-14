@@ -6,5 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 public interface ImagenRepository extends MongoRepository<ImageEntity,String> {
-    Optional<ImageEntity> findByIdCliente(long idCliente);
+    Optional<ImageEntity> findByIdCliente(String idCliente);
+    Optional<ImageEntity> findByFotoAndIdCliente(String foto, String idCliente);
 }

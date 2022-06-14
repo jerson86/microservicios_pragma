@@ -41,7 +41,7 @@ public class ImagenRestController {
     }
 
     @RequestMapping(value = "api/mongo/imagenes/{idCliente}", method = RequestMethod.POST)
-    public ResponseEntity<ImagenDTO> createImagen(@RequestParam("foto") String foto, @PathVariable long idCliente) {
+    public ResponseEntity<ImagenDTO> createImagen(@RequestParam("foto") String foto, @PathVariable String idCliente) {
         return ResponseEntity.ok().body(
                 imagenMapper.mapToDTO(
                     imagenService.createImage(foto,idCliente)
@@ -50,7 +50,7 @@ public class ImagenRestController {
     }
 
     @RequestMapping(value = "api/mongo/imagenes/{id}/{idCliente}", method = RequestMethod.PUT)
-    public ResponseEntity<ImagenDTO> updateImagen(@RequestParam("foto") String foto, @PathVariable String id, @PathVariable long idCliente){
+    public ResponseEntity<ImagenDTO> updateImagen(@RequestParam("foto") String foto, @PathVariable String id, @PathVariable String idCliente){
         return ResponseEntity.ok().body(
                 imagenMapper.mapToDTO(
                     imagenService.updateImagen(id, foto, idCliente)

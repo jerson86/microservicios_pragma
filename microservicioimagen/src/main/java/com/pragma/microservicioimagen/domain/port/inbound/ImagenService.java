@@ -7,9 +7,9 @@ import java.util.List;
 public interface ImagenService {
     List<Imagen> getAllImages();
 
-    Imagen createImage(String foto, long idCliente);
+    Imagen createImage(String foto, String idImagen);
 
-    Imagen updateImagen(String id, String foto, long idCliente);
+    Imagen updateImagen(String id, String foto, String idCliente);
 
     Imagen deleteImagen(String id);
 

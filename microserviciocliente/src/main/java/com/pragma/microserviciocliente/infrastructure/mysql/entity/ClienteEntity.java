@@ -3,8 +3,10 @@ package com.pragma.microserviciocliente.infrastructure.mysql.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -22,6 +24,6 @@ public class ClienteEntity {
         private String documento;
         private short edad;
         private String ciudadNacimiento;
-        //@CreationTimestamp
-        //private Instant fechaRegistro;
+        @CreationTimestamp
+        private Timestamp fechaRegistro;
 }

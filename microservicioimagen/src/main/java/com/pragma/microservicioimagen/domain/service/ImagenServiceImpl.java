@@ -20,14 +20,14 @@ public class ImagenServiceImpl implements ImagenService {
     }
 
     @Override
-    public Imagen createImage(String foto, long idCiente) {
+    public Imagen createImage(String foto, String idCiente) {
 
         return persistImagen.save(foto, idCiente);
     }
 
     @Override
-    public Imagen updateImagen(String id, String foto, long idCliente) {
-        return persistImagen.update(id,foto,idCliente);
+    public Imagen updateImagen(String id, String foto, String idCiente) {
+        return persistImagen.update(id,foto,idCiente);
     }
 
     @Override

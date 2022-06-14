@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ClienteAdapter implements PersistCliente {
@@ -42,6 +43,10 @@ public class ClienteAdapter implements PersistCliente {
 
     @Override
     public Cliente save(Cliente cliente) {
+        Optional<ClienteEntity> clienteDB = clienteRepository.findByTipoDocumentoAndDocumento(cliente.getTipoDocumento(),cliente.getDocumento());
+        if(clienteDB.isPresent()){
+            return clienteMapperMysql.mapToModel(clienteDB.get());
+        }
         // convert DTO to Entity
         ClienteEntity clienteRequest = clienteMapperMysql.mapToEntity(cliente);
         clienteRepository.save(clienteRequest);
